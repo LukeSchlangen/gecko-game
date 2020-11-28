@@ -1,0 +1,22 @@
+div, body, span, button {
+  font-family: 'Montserrat', sans-serif;
+}
+
+button {
+  /* background-image:url(/assets/wood.png); */
+  background-color: #654321;
+  height: 45px;
+  border: 0px;
+  margin: 3px;
+  box-shadow: 2px 2px grey;
+  font-size: 17px;
+  padding: 3px;
+  color: white;
+  cursor: pointer;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}

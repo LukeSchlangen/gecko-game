@@ -1,0 +1,49 @@
+.selection-board {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.selection-button {
+    left: 25%;
+    width: 50%;
+    border: 0px;
+    min-width: 280px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.player-horse-name-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.horse-name {
+    text-align: left;
+}
+
+.player-name {
+    text-align: right;
+}
+
+.horse-image {
+    height: 40px;
+}
+
+.player-image {
+    height: 40px;
+}
+
+.start-game-button {
+    padding-top: 15px;
+}
+
+.start-game {
+    width: 100%;
+    font-size: 35px;
+    height: 60px;
+}

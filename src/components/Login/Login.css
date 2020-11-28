@@ -1,0 +1,9 @@
+.login-button {
+    /* not just for the background */
+    font-size: 30px;
+    top: 30%;
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    border: 0px;
+}

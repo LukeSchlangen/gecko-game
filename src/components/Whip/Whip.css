@@ -1,0 +1,37 @@
+*:focus {
+    outline: none;
+}
+
+body .center {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center; /*centers items on the line (the x-axis by default)*/
+    align-items: center; /*centers items on the cross-axis (y by default)*/
+}
+body .center .select-button {
+  font-size: 60px;
+  padding: -70px auto;
+  /* margin: 0 auto; */
+  width: 200px;
+  height: 180px;
+  line-height: 200px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 15px grey;
+  border: 5px grey;
+}
+body .center .select-button:active {
+  box-shadow: 0 0 grey;
+  transform: translate(0px, 15px);
+  transition: 0.1s all ease-out;
+  border: 5px grey;
+}
+
+.whip-effect {
+    width: 50px;
+    /* height: 100%; */
+    position: absolute;
+}
