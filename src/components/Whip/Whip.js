@@ -41,12 +41,10 @@ class Whip extends Component {
   render() {
     return (
       <div style={{
-        backgroundImage: woodImage,
         height: '100vh',
         width: '100vw',
       }}>
-        <img src="assets/wood.png" alt="whip effect" className="whip-effect" height={`${this.state.power}%`} />
-        {this.state.power}
+        <img src={woodImage} alt="whip effect" className="whip-effect" height={`${this.state.power}%`} />
         <span className="center">
           <button className="select-button" onClick={this.addWhip} >Whip</button>
         </span>

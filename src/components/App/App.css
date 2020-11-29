@@ -3,7 +3,6 @@ div, body, span, button {
 }
 
 button {
-  /* background-image:url(/assets/wood.png); */
   background-color: #654321;
   height: 45px;
   border: 0px;
