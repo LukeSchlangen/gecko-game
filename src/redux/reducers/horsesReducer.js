@@ -1,4 +1,4 @@
-import { HORSES_ACTIONS } from '../actions/horsesActions';
+import { PLAYER_ACTIONS } from '../actions/playerActions';
 import { firebaseAuth } from '../../fire';
 
 const horseIsSelected = horse => horse.player;
@@ -20,15 +20,15 @@ const horses = (state = {
   selectedHorseId: '',
 }, action) => {
   switch (action.type) {
-    case HORSES_ACTIONS.SET_HORSES:
+    case PLAYER_ACTIONS.SET_HORSES:
       return {
         list: action.horses || state.list,
         allHorsesSelected: determineIfAllSelected(action.horses || state.list),
         selectedHorseId: horseUserMatch(action.horses || state.list),
       };
-    case HORSES_ACTIONS.SET_SELECTED_HORSE:
+    case PLAYER_ACTIONS.SET_SELECTED_HORSE:
       return { ...state };
-    case HORSES_ACTIONS.UNSET_SELECTED_HORSE:
+    case PLAYER_ACTIONS.UNSET_SELECTED_HORSE:
       return { ...state, selectedHorseId: '' };
     default:
       return state;

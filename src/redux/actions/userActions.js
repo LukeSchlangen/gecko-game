@@ -1,5 +1,5 @@
 import { firebaseAuth, loginWithGoogle } from '../../fire';
-import { HORSES_ACTIONS } from './horsesActions';
+import { PLAYER_ACTIONS } from './playerActions';
 
 export const USER_ACTIONS = {
   SET_USER: 'SET_USER_ACTION',
@@ -13,7 +13,7 @@ const logoutFlow = (dispatch) => {
     type: USER_ACTIONS.UNSET_USER,
   });
   dispatch({
-    type: HORSES_ACTIONS.UNSET_SELECTED_HORSE,
+    type: PLAYER_ACTIONS.UNSET_SELECTED_HORSE,
   });
 };
 
@@ -23,7 +23,7 @@ const loginFlow = (dispatch, user) => {
     user,
   });
   dispatch({
-    type: HORSES_ACTIONS.SET_HORSES,
+    type: PLAYER_ACTIONS.SET_PLAYERS,
   });
 };
 
