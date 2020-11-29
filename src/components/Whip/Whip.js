@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import fire from '../../fire';
 import './Whip.css';
-import woodImage from '../../images/wood-background.jpg';
 
 class Whip extends Component {
   constructor(props) {
@@ -44,11 +43,9 @@ class Whip extends Component {
         height: '100vh',
         width: '100vw',
       }}>
-        <img src={woodImage} alt="whip effect" className="whip-effect" height={`${this.state.power}%`} />
         <span className="center">
           <button className="select-button" onClick={this.addWhip} >Whip</button>
         </span>
-
       </div>
     );
   }

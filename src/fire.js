@@ -3,12 +3,12 @@ import 'firebase/database'; // If using Firebase database
 import 'firebase/auth';  // If using Firebase storage
 
 const config = {
-  apiKey: 'AIzaSyCCWObqWcRU_otdRmGGwjAZ0eH8rmbh-9s',
-  authDomain: 'derby-day.firebaseapp.com',
-  databaseURL: 'https://derby-day.firebaseio.com',
-  projectId: 'derby-day',
-  storageBucket: 'derby-day.appspot.com',
-  messagingSenderId: '254615289198',
+  apiKey: 'AIzaSyC8voU763E3OhNHBns3ErOjBpgMbXJBF6c',
+  authDomain: 'gecko-game.firebaseapp.com',
+  databaseURL: 'https://gecko-game.firebaseio.com',
+  projectId: 'gecko-game',
+  storageBucket: 'gecko-game.appspot.com',
+  messagingSenderId: '822268289243',
 };
 const fire = firebase.initializeApp(config);
 
