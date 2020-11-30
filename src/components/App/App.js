@@ -4,6 +4,7 @@ import Home from '../Home/Home';
 import Player from '../Player/Player';
 import { fetchUser } from '../../redux/actions/userActions';
 import './App.css';
+import Logout from '../Logout/Logout';
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -17,7 +18,10 @@ const mapDispatchToProps = dispatch => ({
 const App = (props) => {
   return (
     <div className="App">
-      {props.user ? <Player {...props} /> : <Home {...props} />}
+      {props.user ? (<>
+        <Logout user={props.user} />
+        <Player {...props} />
+      </>) : <Home {...props} />}
     </div>
   );
 }

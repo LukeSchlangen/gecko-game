@@ -9,9 +9,13 @@ const PlayerInGameView = (props) => {
   }
   return (
     <>
-      <pre>
-        {JSON.stringify(props, null, 2)}
-      </pre>
+      { props?.currentGameInformation?.geckoPlayerID === props.user.uid ? 'You are the Gecko!' : `You are not the gecko. The secret word is ${props?.currentGameInformation?.secretWord}` }
+      <p>
+        The words are:
+      </p>
+      <ul>
+        {props?.currentGameInformation?.allWords.map((word) => (<li key={word}>{word}</li>))}
+      </ul>
       <div className="selection-board start-game-button">
         <button
           className="selection-button"
