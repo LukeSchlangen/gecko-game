@@ -1,30 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import fire from '../../fire';
 import './PlayerInGameView.css';
 
 const PlayerInGameView = (props) => {
-  const currentGameRef = fire.database().ref('current_game_information');
-  const endGame = () => {
-    currentGameRef.child('status').set('waiting for players');
-  }
+  const secretWord = props?.currentGameInformation?.secretWord;
+  const isGecko = props?.currentGameInformation?.geckoPlayerID === props.user.uid;
   return (
     <>
-      { props?.currentGameInformation?.geckoPlayerID === props.user.uid ? 'You are the Gecko!' : `You are not the gecko. The secret word is ${props?.currentGameInformation?.secretWord}` }
+      { isGecko ? 'You are the Gecko!' : <div>You are not the gecko. The secret card is:<br /><h2 className="card" style={{margin: '10px'}}>{secretWord}</h2></div>}
       <p>
-        The words are:
+        The cards are:
       </p>
-      <ul>
-        {props?.currentGameInformation?.allWords.map((word) => (<li key={word}>{word}</li>))}
-      </ul>
-      <div className="selection-board start-game-button">
-        <button
-          className="selection-button"
-          onClick={() => endGame()}
-        >
-          <span className="start-game">
-            End Game
-          </span>
-        </button>
+      <div className="cards">
+        {props?.currentGameInformation?.allWords.map((word) => (<div key={word} className={`card${(!isGecko && secretWord === word) ? ' secret-card' : ''}`}>{word}</div>))}
       </div>
     </>
   )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Home from '../Home/Home';
+import Login from '../Login/Login';
 import Player from '../Player/Player';
 import { fetchUser } from '../../redux/actions/userActions';
 import './App.css';
@@ -21,7 +21,7 @@ const App = (props) => {
       {props.user ? (<>
         <Logout user={props.user} />
         <Player {...props} />
-      </>) : <Home {...props} />}
+      </>) : <Login />}
     </div>
   );
 }

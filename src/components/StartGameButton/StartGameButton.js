@@ -13,14 +13,21 @@ const categories = [
   { name: 'Netflix', items: ['Never Have I Ever', 'Too Hot to Handle', 'Warrior Nun', 'Riverdale', 'The Order', 'Sweet Magnolias', 'Unsolved Mysteries', 'The Trials of Gabriel Hernandez', 'Floor is Lava', 'The Office', 'Dead to Me', '13 Reasons Why', 'Space Force', 'Jeffrey Epstein: Filthy Rich', 'All American', 'Love is Blind', 'Avatar: The Last Airbender', 'Outer Banks', 'Ozark', 'Tiger King: Murder, Mayhem and Madness'] }
 ]
 
+const shuffleArray = (array) => array
+  .map((a) => ({ sort: Math.random(), value: a }))
+  .sort((a, b) => a.sort - b.sort)
+  .map((a) => a.value)
+  .slice(0, 15);
+
 const StartGameButton = (props) => {
   const startGame = () => {
     currentGameRef.child('status').set('in progress');
     currentGameRef.child('geckoPlayerID').set(pickRandom(Object.values(props.currentGameInformation.players)).uid);
     const category = pickRandom(categories);
-    currentGameRef.child('secretWord').set(pickRandom(category.items));
     currentGameRef.child('category').set(category.name);
-    currentGameRef.child('allWords').set(category.items);
+    const items = shuffleArray(category.items);
+    currentGameRef.child('secretWord').set(pickRandom(items));
+    currentGameRef.child('allWords').set(items);
   }
 
   return (

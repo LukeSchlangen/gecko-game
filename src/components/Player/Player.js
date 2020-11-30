@@ -3,6 +3,7 @@ import PlayerInGameView from '../PlayerInGameView/PlayerInGameView';
 import JoinGameButton from '../JoinGameButton/JoinGameButton';
 import LeaveGameButton from '../LeaveGameButton/LeaveGameButton';
 import StartGameButton from '../StartGameButton/StartGameButton';
+import EndGameButton from '../EndGameButton/EndGameButton';
 import fire from '../../fire';
 import './Player.css';
 import PlayerList from '../PlayerList/PlayerList';
@@ -24,6 +25,8 @@ const Player = props => {
     return <>
       <PlayerInGameView currentGameInformation={currentGameInformation} {...props} />
       <PlayerList currentGameInformation={currentGameInformation} {...props} />
+      <hr />
+      <EndGameButton />
     </>
   }
 
