@@ -11,10 +11,20 @@ import PlayerList from '../PlayerList/PlayerList';
 const currentGameRef = fire.database().ref('current_game_information');
 
 const Player = props => {
-  const [currentGameInformation, setCurrentGameInformation] = useState({});
+  const [currentGameInformation, setCurrentGameInformation] = useState({ players: {} });
   useEffect(() => {
     currentGameRef.on('value', (snapshot) => {
-      setCurrentGameInformation(snapshot.val());
+      const rawCurrentGameData = snapshot.val();
+      console.log(rawCurrentGameData);
+      const playersWithVotesAgainst = Object.values(rawCurrentGameData.players).reduce((aggregatePlayers, currentPlayerVoting) => {
+        if (currentPlayerVoting.vote) return { ...aggregatePlayers, [currentPlayerVoting.vote]: { ...aggregatePlayers[currentPlayerVoting.vote], votesAgainst: (aggregatePlayers[currentPlayerVoting.vote].votesAgainst || 0) + 1 }}
+        return aggregatePlayers; 
+      }, rawCurrentGameData.players || {});
+      const gameInformationWithVotes = {
+        ...rawCurrentGameData,
+        players: playersWithVotesAgainst,
+      };
+      setCurrentGameInformation(gameInformationWithVotes);
     });
   }, [currentGameRef]);
 
