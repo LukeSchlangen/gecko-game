@@ -38,6 +38,10 @@ const StartGameButton = (props) => {
     const items = shuffleArray(category.items);
     currentGameRef.child('secretWord').set(pickRandom(items));
     currentGameRef.child('allWords').set(items);
+    const timerRef = currentGameRef.child('timer');
+    timerRef.child('startTime').set(Date.now());
+    timerRef.child('timeRemaining').set('10:00');
+    timerRef.child('startedBy').set(props.user.uid);
   }
 
   return (

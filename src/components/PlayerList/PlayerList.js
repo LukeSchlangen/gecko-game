@@ -25,7 +25,7 @@ const PlayerList = props => {
             <div className="player-horse-name-container">
               <div className="horse-name">
                 {player.name}
-                {votesAgainst > 0 && ` - ${votesAgainst} Votes Against`}
+                {votesAgainst > 0 && ` - ${votesAgainst} Vote${votesAgainst > 1 ? 's' : ''} Against`}
               </div>
               {currentVote === player.uid &&
               <div className="player-name">
