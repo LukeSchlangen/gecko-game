@@ -57,3 +57,7 @@ body .center .select-button:active {
 .secret-card {
   background-color: chartreuse;
 }
+
+.gecko-card-guess {
+  border: 2px solid #0d3d19;
+}

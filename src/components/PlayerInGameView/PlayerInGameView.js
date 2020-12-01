@@ -34,11 +34,15 @@ const PlayerInGameView = (props) => {
       </> : <>
           <div>
             {isGecko ? <>
+              <div>
               You are the Gecko!
-        {geckoCardGuess ? ` Your current guess is ${geckoCardGuess}. ` : ' Make sure to guess before time runs out. '}
+              </div>
+        {geckoCardGuess ? 
+              <div>Your current guess is: <br /><h2 className="card" style={{ margin: '10px' }}>{geckoCardGuess}</h2></div> : <div>Make sure to guess before time runs out.</div>}
         You can change your guess any time before time runs out.
         </> : <>You are not the gecko. The secret card is:<br /><h2 className="card" style={{ margin: '10px' }}>{secretWord}</h2></>}
           </div>
+          <br />
           <div>
             The category is: <b>{props?.currentGameInformation?.category}</b>
           </div>
@@ -52,7 +56,7 @@ const PlayerInGameView = (props) => {
           <div
             key={word}
             onClick={() => setGeckoCardGuess(word)}
-            className={`card${(!isGecko && secretWord === word) ? ' secret-card' : ''}`}
+            className={`card${((!isGecko || timeIsUp) && secretWord === word) ? ' secret-card' : ''}${((isGecko || timeIsUp) && geckoCardGuess === word) ? ' gecko-card-guess' : ''}`}
           >
             {word}
           </div>
