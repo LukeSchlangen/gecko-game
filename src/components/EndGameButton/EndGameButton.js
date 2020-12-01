@@ -5,6 +5,7 @@ const currentGameRef = fire.database().ref('current_game_information');
 
 const EndGameButton = (props) => {
   const endGame = () => {
+    fire.database().ref('game_history').push(props.currentGameInformation);
     currentGameRef.child('status').set('waiting for players');
     Object.keys(props.currentGameInformation.players).forEach(playerID => currentGameRef.child('players').child(playerID).child('vote').remove());
   }

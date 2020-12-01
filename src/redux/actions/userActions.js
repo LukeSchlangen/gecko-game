@@ -1,5 +1,4 @@
 import { firebaseAuth, loginWithGoogle } from '../../fire';
-import { PLAYER_ACTIONS } from './playerActions';
 
 export const USER_ACTIONS = {
   SET_USER: 'SET_USER_ACTION',
@@ -12,18 +11,12 @@ const logoutFlow = (dispatch) => {
   dispatch({
     type: USER_ACTIONS.UNSET_USER,
   });
-  dispatch({
-    type: PLAYER_ACTIONS.UNSET_SELECTED_HORSE,
-  });
 };
 
 const loginFlow = (dispatch, user) => {
   dispatch({
     type: USER_ACTIONS.SET_USER,
     user,
-  });
-  dispatch({
-    type: PLAYER_ACTIONS.SET_PLAYERS,
   });
 };
 

@@ -17,13 +17,20 @@ const PlayerInGameView = (props) => {
 
   const determineEndGameMessage = () => {
     const gecko = props?.currentGameInformation?.players[props?.currentGameInformation?.geckoPlayerID];
-    if (geckoCardGuess === secretWord) return <><div>The Gecko - {gecko.name} - wins!</div><div>They guessed the correct secret word!</div></>;
+    if (geckoCardGuess === secretWord) {
+      currentGameRef.child('winner').set(gecko);
+      return <><div>The Gecko - {gecko.name} - wins!</div><div>They guessed the correct secret word!</div></>;
+    }
     const geckoCaught = Object.values(props?.currentGameInformation?.players).reduce((currentOutcome, player) => {
       // if another player has as many or more votes, then the gecko was not caught
       if (player.uid !== gecko.uid && player.votesAgainst >= gecko.votesAgainst) return false;
       return currentOutcome;
     }, true)
-    if (geckoCaught) return <><div>The group wins!</div><div>They caught the Gecko - {gecko.name}!</div></>;
+    if (geckoCaught) {
+      currentGameRef.child('winner').set('group');
+      return <><div>The group wins!</div><div>They caught the Gecko - {gecko.name}!</div></>;
+    }
+    currentGameRef.child('winner').set(gecko);
     return <><div>The Gecko - {gecko.name} - wins!</div><div>The group didn&apos;t catch them!</div></>;
   }
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Login from '../Login/Login';
 import Player from '../Player/Player';
@@ -8,7 +8,6 @@ import Logout from '../Logout/Logout';
 
 const mapStateToProps = state => ({
   user: state.user,
-  players: state.players,
 });
 
 const mapDispatchToProps = dispatch => ({
