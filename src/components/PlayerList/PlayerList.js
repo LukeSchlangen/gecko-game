@@ -7,11 +7,12 @@ const PlayerList = props => {
   // vote for a player
   const currentVote = props?.currentGameInformation?.players[props?.user?.uid]?.vote;
   const onPlayerButtonClick = (player) => {
-    if (props.currentGameInformation.timer.timeRemaining !== '00:00') {
-      if (player.uid === currentVote || props.currentGameInformation.status !== 'in progress') {
-        currentGameRef.child('players').child(props.user.uid).child('vote').remove();
+    if (props.currentGameInformation.timer.timeRemaining !== '00:00' && props.currentGameInformation.status === 'in progress') {
+      const playerVoteRef = currentGameRef.child('players').child(props.user.uid).child('vote');
+      if (player.uid === currentVote) {
+        playerVoteRef.remove();
       } else {
-        currentGameRef.child('players').child(props.user.uid).child('vote').set(player.uid);
+        playerVoteRef.set(player.uid);
       }
     }
   }
