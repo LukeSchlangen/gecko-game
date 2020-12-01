@@ -17,14 +17,14 @@ const PlayerInGameView = (props) => {
 
   const determineEndGameMessage = () => {
     const gecko = props?.currentGameInformation?.players[props?.currentGameInformation?.geckoPlayerID];
-    if (geckoCardGuess === secretWord) return `The Gecko - ${gecko.name} - wins because they guessed the correct secret word!`
+    if (geckoCardGuess === secretWord) return <><div>The Gecko - {gecko.name} - wins!</div><div>They guessed the correct secret word!</div></>;
     const geckoCaught = Object.values(props?.currentGameInformation?.players).reduce((currentOutcome, player) => {
       // if another player has as many or more votes, then the gecko was not caught
       if (player.uid !== gecko.uid && player.votesAgainst >= gecko.votesAgainst) return false;
       return currentOutcome;
     }, true)
-    if (geckoCaught) return `The group wins! They caught the Gecko - ${gecko.name}!`
-    return `The Gecko - ${gecko.name} - wins! The group didn\'t catch them!`
+    if (geckoCaught) return <><div>The group wins!</div><div>They caught the Gecko - {gecko.name}!</div></>;
+    return <><div>The Gecko - {gecko.name} - wins!</div><div>The group didn&apos;t catch them!</div></>;
   }
 
   return (
@@ -33,14 +33,33 @@ const PlayerInGameView = (props) => {
         {determineEndGameMessage()}
       </> : <>
           <div>
-            {isGecko ? <>
-              <div>
-              You are the Gecko!
-              </div>
-        {geckoCardGuess ? 
-              <div>Your current guess is: <br /><h2 className="card" style={{ margin: '10px' }}>{geckoCardGuess}</h2></div> : <div>Make sure to guess before time runs out.</div>}
-        You can change your guess any time before time runs out.
-        </> : <>You are not the gecko. The secret card is:<br /><h2 className="card" style={{ margin: '10px' }}>{secretWord}</h2></>}
+            {isGecko ? (
+              <>
+                <h1>
+                  You are the Gecko!
+                </h1>
+                {geckoCardGuess ? (
+                  <div>
+                    Your current guess is:
+                    <br />
+                    <h2 className="card" style={{ margin: '10px' }}>{geckoCardGuess}</h2>
+                  </div>
+                ) : (
+                    <div>
+                      Make sure to guess before time runs out.
+                    </div>
+                  )}
+                <small>Guess a word by clicking it below. You can change your guess any time before time runs out.</small>
+              </>
+            ) : (
+                <div>
+                  You are not the gecko. The secret card is:
+                  <br />
+                  <h2 className="card" style={{ margin: '10px' }}>
+                    {secretWord}
+                  </h2>
+                </div>
+              )}
           </div>
           <br />
           <div>
