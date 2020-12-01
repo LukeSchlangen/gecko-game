@@ -7,7 +7,12 @@ const PlayerInGameView = (props) => {
   const isGecko = props?.currentGameInformation?.geckoPlayerID === props.user.uid;
   return (
     <>
-      { isGecko ? 'You are the Gecko!' : <div>You are not the gecko. The secret card is:<br /><h2 className="card" style={{margin: '10px'}}>{secretWord}</h2></div>}
+      <div>
+        The category is: <b>{props?.currentGameInformation?.category}</b>
+      </div>
+      <div>
+      { isGecko ? 'You are the Gecko!' : <>You are not the gecko. The secret card is:<br /><h2 className="card" style={{margin: '10px'}}>{secretWord}</h2></>}
+      </div>
       <p>
         The cards are:
       </p>
