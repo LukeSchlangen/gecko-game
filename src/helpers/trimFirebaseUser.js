@@ -1,15 +1,8 @@
-const trimFirebaseUser = (firebaseUser) => {
-  let user = null;
-  if (firebaseUser) {
-    user = {
-      name: firebaseUser.displayName,
-      email: firebaseUser.email,
-      photoUrl: firebaseUser.photoURL,
-      emailVerified: firebaseUser.emailVerified,
-      uid: firebaseUser.uid,
-    };
-  }
-  return user;
-};
+const trimFirebaseUser = (firebaseUser) => firebaseUser ? ({
+  name: firebaseUser.displayName,
+  email: firebaseUser.email,
+  photoUrl: firebaseUser.photoURL,
+  uid: firebaseUser.uid,
+}) : null;
 
 export default trimFirebaseUser;
