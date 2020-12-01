@@ -26,8 +26,8 @@ const Player = props => {
   useEffect(() => {
     currentGameRef.on('value', (snapshot) => {
       const rawCurrentGameData = snapshot.val();
-      const playersBeforeVoteTally = rawCurrentGameData.players ? Object.values(rawCurrentGameData.players).reduce((aggregatePlayers, player) => ({ ...aggregatePlayers, [player.uid]: { ...player, votesAgainst: 0 } }), {}) : {}
-      const playersWithVotesAgainst = Object.values(rawCurrentGameData.players).reduce((aggregatePlayers, currentPlayerVoting) => {
+      const playersBeforeVoteTally = Object.values(rawCurrentGameData?.players || {}).reduce((aggregatePlayers, player) => ({ ...aggregatePlayers, [player.uid]: { ...player, votesAgainst: 0 } }), {});
+      const playersWithVotesAgainst = Object.values(playersBeforeVoteTally).reduce((aggregatePlayers, currentPlayerVoting) => {
         if (currentPlayerVoting.vote) return { ...aggregatePlayers, [currentPlayerVoting.vote]: { ...aggregatePlayers[currentPlayerVoting.vote], votesAgainst: aggregatePlayers[currentPlayerVoting.vote].votesAgainst + 1 } }
         return aggregatePlayers;
       }, playersBeforeVoteTally);
