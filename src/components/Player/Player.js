@@ -27,10 +27,11 @@ const Player = props => {
     currentGameRef.on('value', (snapshot) => {
       const rawCurrentGameData = snapshot.val();
       console.log(rawCurrentGameData);
+      const playersBeforeVoteTally = rawCurrentGameData.players ? Object.values(rawCurrentGameData.players).reduce((aggregatePlayers, player) => ({ ...aggregatePlayers, [player.uid]: { ...player, votesAgainst: 0 } }), {}) : {}
       const playersWithVotesAgainst = Object.values(rawCurrentGameData.players).reduce((aggregatePlayers, currentPlayerVoting) => {
-        if (currentPlayerVoting.vote) return { ...aggregatePlayers, [currentPlayerVoting.vote]: { ...aggregatePlayers[currentPlayerVoting.vote], votesAgainst: (aggregatePlayers[currentPlayerVoting.vote].votesAgainst || 0) + 1 } }
+        if (currentPlayerVoting.vote) return { ...aggregatePlayers, [currentPlayerVoting.vote]: { ...aggregatePlayers[currentPlayerVoting.vote], votesAgainst: aggregatePlayers[currentPlayerVoting.vote].votesAgainst + 1 } }
         return aggregatePlayers;
-      }, rawCurrentGameData.players || {});
+      }, playersBeforeVoteTally);
       const gameInformationWithVotes = {
         ...rawCurrentGameData,
         players: playersWithVotesAgainst,
@@ -39,18 +40,6 @@ const Player = props => {
     });
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if(currentGameInformation?.timer?.startedBy === props?.user?.uid) {
-        const timeElapsed = Date.now() - currentGameInformation?.timer?.startTime;
-        const millisecondsRemaining = Math.max(600000 - timeElapsed, 0); // 10 minute game
-        const formattedTimeRemaining = msToTime(millisecondsRemaining);
-        currentGameRef.child('timer').child('timeRemaining').set(formattedTimeRemaining);
-      }
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [currentGameInformation?.timer?.startTime]);
-
   const playerIsInGame = Object.keys(currentGameInformation?.players || {}).includes(props?.user?.uid);
   const gameIsInProgress = currentGameInformation?.status === 'in progress';
 
@@ -58,10 +47,10 @@ const Player = props => {
     return <>
       <PlayerInGameView currentGameInformation={currentGameInformation} {...props} />
       <hr />
-      <Timer {...props} />
+      <Timer currentGameInformation={currentGameInformation} {...props} />
       <PlayerList currentGameInformation={currentGameInformation} {...props} />
       <hr />
-      <EndGameButton />
+      <EndGameButton currentGameInformation={currentGameInformation} {...props} />
     </>
   }
 

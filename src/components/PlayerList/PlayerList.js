@@ -7,17 +7,18 @@ const PlayerList = props => {
   // vote for a player
   const currentVote = props?.currentGameInformation?.players[props?.user?.uid]?.vote;
   const onPlayerButtonClick = (player) => {
-    if (player.uid === currentVote || props.currentGameInformation.status !== 'in progress') {
-      currentGameRef.child('players').child(props.user.uid).child('vote').remove();
-    } else {
-      currentGameRef.child('players').child(props.user.uid).child('vote').set(player.uid);
+    if (props.currentGameInformation.timer.timeRemaining !== '00:00') {
+      if (player.uid === currentVote || props.currentGameInformation.status !== 'in progress') {
+        currentGameRef.child('players').child(props.user.uid).child('vote').remove();
+      } else {
+        currentGameRef.child('players').child(props.user.uid).child('vote').set(player.uid);
+      }
     }
   }
   return (<>
     <hr />
     {
       Object.values(props?.currentGameInformation?.players).map(player => {
-        const votesAgainst = player.votesAgainst || 0;
         return (
         <div key={player.uid} className="selection-board">
           <button onClick={() => onPlayerButtonClick(player)} className="selection-button">
@@ -25,7 +26,7 @@ const PlayerList = props => {
             <div className="player-horse-name-container">
               <div className="horse-name">
                 {player.name}
-                {votesAgainst > 0 && ` - ${votesAgainst} Vote${votesAgainst > 1 ? 's' : ''} Against`}
+                {player.votesAgainst > 0 && ` - ${player.votesAgainst} Vote${player.votesAgainst > 1 ? 's' : ''} Against`}
               </div>
               {currentVote === player.uid &&
               <div className="player-name">

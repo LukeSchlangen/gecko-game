@@ -1,11 +1,14 @@
 import React from 'react';
 import fire from '../../fire';
 
-const EndGameButton = () => {
-  const currentGameRef = fire.database().ref('current_game_information');
+const currentGameRef = fire.database().ref('current_game_information');
+
+const EndGameButton = (props) => {
   const endGame = () => {
     currentGameRef.child('status').set('waiting for players');
+    Object.keys(props.currentGameInformation.players).forEach(playerID => currentGameRef.child('players').child(playerID).child('vote').remove());
   }
+
   return (
     <>
       <div className="selection-board start-game-button">

@@ -14,22 +14,7 @@ function msToTime(duration) {
 }
 
 const Timer = props => {
-    const [currentGameInformation, setCurrentGameInformation] = useState({ players: {} });
-    useEffect(() => {
-        currentGameRef.on('value', (snapshot) => {
-            const rawCurrentGameData = snapshot.val();
-            console.log(rawCurrentGameData);
-            const playersWithVotesAgainst = Object.values(rawCurrentGameData.players).reduce((aggregatePlayers, currentPlayerVoting) => {
-                if (currentPlayerVoting.vote) return { ...aggregatePlayers, [currentPlayerVoting.vote]: { ...aggregatePlayers[currentPlayerVoting.vote], votesAgainst: (aggregatePlayers[currentPlayerVoting.vote].votesAgainst || 0) + 1 } }
-                return aggregatePlayers;
-            }, rawCurrentGameData.players || {});
-            const gameInformationWithVotes = {
-                ...rawCurrentGameData,
-                players: playersWithVotesAgainst,
-            };
-            setCurrentGameInformation(gameInformationWithVotes);
-        });
-    }, []);
+    const currentGameInformation = props.currentGameInformation;
 
     useEffect(() => {
         const interval = setInterval(() => {

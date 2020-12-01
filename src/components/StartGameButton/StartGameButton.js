@@ -38,6 +38,7 @@ const StartGameButton = (props) => {
     const items = shuffleArray(category.items);
     currentGameRef.child('secretWord').set(pickRandom(items));
     currentGameRef.child('allWords').set(items);
+    currentGameRef.child('geckoCardGuess').remove();
     const timerRef = currentGameRef.child('timer');
     timerRef.child('startTime').set(Date.now());
     timerRef.child('timeRemaining').set('10:00');
