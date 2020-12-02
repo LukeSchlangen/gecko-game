@@ -1,28 +1,37 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import Login from '../Login/Login';
 import Player from '../Player/Player';
-import { fetchUser } from '../../redux/actions/userActions';
 import './App.css';
 import Logout from '../Logout/Logout';
+import { firebaseAuth } from '../../fire';
 
-const mapStateToProps = state => ({
-  user: state.user,
-});
-
-const mapDispatchToProps = dispatch => ({
-  fetchUser: () => dispatch(fetchUser()),
-});
-
-const App = (props) => {
+const App = () => {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    firebaseAuth.onAuthStateChanged(
+      (user) => {
+        if(user) {
+          setUser({
+            email: user.email,
+            name: user.displayName,
+            photoURL: user.photoURL,
+            uid: user.uid,
+          });
+        } else {
+          setUser(null);
+        }
+      },
+      () => { alert('Something went wrong while logging in. Refresh this page and try again.'); setUser(null) },
+    );
+  }, []);
   return (
     <div className="App">
-      {props.user ? (<>
-        <Logout user={props.user} />
-        <Player {...props} />
+      {user ? (<>
+        <Logout user={user} />
+        <Player user={user} />
       </>) : <Login />}
     </div>
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

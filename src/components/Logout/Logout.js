@@ -1,27 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { firebaseAuth } from '../../fire';
 import './Logout.css';
 
-import {
-  logoutUser,
-} from '../../redux/actions/userActions';
-
-const mapStateToProps = state => ({
-  user: state.user,
-});
-
-const mapDispatchToProps = dispatch => ({
-  logoutUser: () => { dispatch(logoutUser()); },
-});
-
-const Logout = props => (
+const Logout = props => {
+  const logout = () => firebaseAuth.signOut();
+  return (
   <div className="logout-button">
     {props.user.email}
-    <button onClick={() => { props.logoutUser(); }}>
+    <button onClick={logout}>
       Logout
     </button>
   </div>
-);
+)};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Logout);
+export default Logout;
 

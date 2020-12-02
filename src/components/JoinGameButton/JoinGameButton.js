@@ -19,7 +19,7 @@ const JoinGameButton = (props) => {
       >
         <span className="start-game">
           Join Game
-      </span>
+        </span>
       </button>
     </div>
   );

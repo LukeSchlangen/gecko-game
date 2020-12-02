@@ -1,29 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { loginWithGoogle } from '../../fire';
 import './Login.css';
 
-import {
-  loginUserWithGoogle,
-} from '../../redux/actions/userActions';
-
-const mapStateToProps = state => ({
-  user: state.user,
-});
-
-const mapDispatchToProps = dispatch => ({
-  loginUserWithGoogle: () => { dispatch(loginUserWithGoogle()); },
-});
-
-const Login = props => (
+const Login = () => (
   <div className="container">
     <button
       className="login-button"
-      onClick={() => { props.loginUserWithGoogle(); }}
+      onClick={loginWithGoogle}
     >
     Login
     </button>
   </div>
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;
 

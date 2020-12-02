@@ -16,22 +16,18 @@
     justify-content: space-between;
 }
 
-.player-horse-name-container {
+.player-list-container {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.horse-name {
+.align-left {
     text-align: left;
 }
 
-.player-name {
+.align-right {
     text-align: right;
-}
-
-.horse-image {
-    height: 40px;
 }
 
 .player-image {
