@@ -15,7 +15,7 @@ const LeaveGameButton = (props) => {
   return (
     <div className="selection-board start-game-button">
       <button
-        className="selection-button"
+        className="primary-button selection-button"
         onClick={leaveGame}
       >
         <span className="start-game">

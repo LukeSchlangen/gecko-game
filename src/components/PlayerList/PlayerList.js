@@ -23,7 +23,7 @@ const PlayerList = props => {
       Object.values(props?.currentGameInformation?.players).map(player => {
         return (
           <div key={player.uid} className="selection-board">
-            <button onClick={() => onPlayerButtonClick(player)} className="selection-button">
+            <button onClick={() => onPlayerButtonClick(player)} className="primary-button selection-button">
               {<img src={player.photoURL || robotImage} alt={player.name} className="player-image" />}
               <div className="player-list-container">
                 <div className="align-left">

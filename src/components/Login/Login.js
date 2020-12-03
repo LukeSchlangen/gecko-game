@@ -5,7 +5,7 @@ import './Login.css';
 const Login = () => (
   <div className="container">
     <button
-      className="login-button"
+      className="primary-button login-button"
       onClick={loginWithGoogle}
     >
     Login

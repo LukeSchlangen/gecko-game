@@ -18,7 +18,11 @@ const Timer = props => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (currentGameInformation?.timer?.startedBy === props?.user?.uid) {
+      if(currentGameInformation?.geckoFinalAnswer) {
+        console.log(currentGameInformation.geckoFinalAnswer);
+        currentGameRef.child('timer').child('timeRemaining').set('00:00');
+        clearInterval(interval);
+      } else if (currentGameInformation?.timer?.startedBy === props?.user?.uid) {
         const timeElapsed = Date.now() - currentGameInformation?.timer?.startTime;
         const millisecondsRemaining = Math.max(600000 - timeElapsed, 0); // 10 minute game
         const formattedTimeRemaining = msToTime(millisecondsRemaining);
@@ -26,7 +30,7 @@ const Timer = props => {
       }
     }, 1000);
     return () => clearInterval(interval);
-  }, [currentGameInformation?.timer?.startTime, currentGameInformation?.timer?.startedBy, props?.user?.uid]);
+  }, [currentGameInformation?.timer?.startTime, currentGameInformation?.timer?.startedBy, props?.user?.uid, currentGameInformation?.geckoFinalAnswer]);
 
   return (<center>
     <div style={{ width: '100px' }}>

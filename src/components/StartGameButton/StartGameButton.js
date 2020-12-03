@@ -39,6 +39,7 @@ const StartGameButton = (props) => {
     currentGameRef.child('secretWord').set(pickRandom(items));
     currentGameRef.child('allWords').set(items);
     currentGameRef.child('geckoCardGuess').remove();
+    currentGameRef.child('geckoFinalAnswer').remove();
     currentGameRef.child('winner').remove();
     const timerRef = currentGameRef.child('timer');
     timerRef.child('startTime').set(Date.now());
@@ -50,7 +51,7 @@ const StartGameButton = (props) => {
     <>
       <div className="selection-board start-game-button">
         <button
-          className="selection-button"
+          className="primary-button selection-button"
           onClick={startGame}
         >
           <span className="start-game">

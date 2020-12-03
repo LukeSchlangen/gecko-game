@@ -14,7 +14,7 @@ const EndGameButton = (props) => {
     <>
       <div className="selection-board start-game-button">
         <button
-          className="selection-button"
+          className="primary-button selection-button"
           onClick={() => endGame()}
         >
           <span className="start-game">

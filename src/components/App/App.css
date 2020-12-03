@@ -2,7 +2,7 @@ div, body, span, button {
   font-family: 'Montserrat', sans-serif;
 }
 
-button {
+.primary-button {
   background-color: #654321;
   height: 45px;
   border: 0px;
