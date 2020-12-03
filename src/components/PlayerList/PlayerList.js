@@ -15,6 +15,13 @@ const PlayerList = props => {
       } else {
         playerVoteRef.set(player.uid);
       }
+    } else if (props.currentGameInformation.status !== 'in progress') {
+      if (window.confirm(`Are you sure you want to remove ${player.name} from the game?`)) {
+        currentGameRef
+          .child('players')
+          .child(player.uid)
+          .remove();
+      }
     }
   }
   return (<>
