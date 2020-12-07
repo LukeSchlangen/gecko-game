@@ -4,7 +4,7 @@ div, body, span, button {
 
 .primary-button {
   background-color: #654321;
-  height: 45px;
+  min-height: 45px;
   border: 0px;
   margin: 3px;
   box-shadow: 2px 2px grey;
