@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import fire from '../../fire';
+import Confirm from '../Confirm/Confirm';
 import './PlayerInGameView.css';
 
 const currentGameRef = fire.database().ref('current_game_information');
@@ -59,13 +60,15 @@ const PlayerInGameView = (props) => {
       {timeIsUp ? <>
         {determineEndGameMessage()}
       </> : <>
-          {showFinalAnswerOption ? <>
-            <button className="primary-button" onClick={() => setShowFinalAnswerOption(false)}>Go back. I am not sure that the word is &quot;{geckoCardGuess}&quot;</button>
+          {showFinalAnswerOption ? <Confirm>
+            <button className="primary-button" onClick={() => setShowFinalAnswerOption(false)}>
+              Go back. I am not sure that the word is &quot;{geckoCardGuess}&quot;
+            </button>
             <br />
-            <button onClick={() => setFinalAnswer(geckoCardGuess)}>
+            <button  className="primary-button" onClick={() => setFinalAnswer(geckoCardGuess)}>
               I am absolutely certain that the word is &quot;{geckoCardGuess}&quot; and I want to end the game early.
             </button>
-          </> : <>
+          </Confirm> : <>
               <div>
                 {isGecko ? (
                   <>
@@ -77,7 +80,9 @@ const PlayerInGameView = (props) => {
                         Your current guess is:
                         <br />
                         <h2 className="card" style={{ margin: '10px' }}>{geckoCardGuess}</h2>
-                        <button onClick={() => setShowFinalAnswerOption(true)}>End the game by making &quot;{geckoCardGuess}&quot; your final answer</button>
+                        <button class="primary-button" onClick={() => setShowFinalAnswerOption(true)}>
+                          End the game by making &quot;{geckoCardGuess}&quot; your final answer
+                        </button>
                       </div>
                     ) : (
                         <div>

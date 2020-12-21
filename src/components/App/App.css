@@ -6,7 +6,7 @@ div, body, span, button {
   background-color: #654321;
   min-height: 45px;
   border: 0px;
-  margin: 3px;
+  margin: 3px 30px;
   box-shadow: 2px 2px grey;
   font-size: 17px;
   padding: 3px;

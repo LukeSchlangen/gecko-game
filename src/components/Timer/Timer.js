@@ -23,8 +23,8 @@ const Timer = props => {
       const votesNeededToEndGame = Math.ceil(numberOfPlayers / 2);
       const playerVotedAsGecko = playersArray.find(player => player.finalizedVotesAgainst && player.finalizedVotesAgainst >= votesNeededToEndGame);
       const totalFinalizedVotes = playersArray.reduce((totalCount, player) => player.finalizedVotesAgainst ? totalCount + 1 : totalCount, 0);
-      if(currentGameInformation?.geckoFinalAnswer || totalFinalizedVotes === numberOfPlayers || playerVotedAsGecko) {
-        // if the gecko has guessed, end the game
+      if(currentGameInformation?.geckoFinalAnswer || totalFinalizedVotes === numberOfPlayers || playerVotedAsGecko?.uid) {
+        // end game
         currentGameRef.child('timer').child('timeRemaining').set('00:00');
         clearInterval(interval);
       } else if (currentGameInformation?.timer?.startedBy === props?.user?.uid) {
@@ -43,7 +43,6 @@ const Timer = props => {
         {currentGameInformation?.timer?.timeRemaining}
       </div>
     </div>
-    <pre>{JSON.stringify(currentGameInformation.players)}</pre>
   </center>);
 };
 
