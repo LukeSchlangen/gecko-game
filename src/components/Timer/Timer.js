@@ -18,8 +18,13 @@ const Timer = props => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if(currentGameInformation?.geckoFinalAnswer) {
-        console.log(currentGameInformation.geckoFinalAnswer);
+      const playersArray = Object.values(currentGameInformation.players);
+      const numberOfPlayers = playersArray.length;
+      const votesNeededToEndGame = Math.ceil(numberOfPlayers / 2);
+      const playerVotedAsGecko = playersArray.find(player => player.finalizedVotesAgainst && player.finalizedVotesAgainst >= votesNeededToEndGame);
+      const totalFinalizedVotes = playersArray.reduce((totalCount, player) => player.finalizedVotesAgainst ? totalCount + 1 : totalCount, 0);
+      if(currentGameInformation?.geckoFinalAnswer || totalFinalizedVotes === numberOfPlayers || playerVotedAsGecko) {
+        // if the gecko has guessed, end the game
         currentGameRef.child('timer').child('timeRemaining').set('00:00');
         clearInterval(interval);
       } else if (currentGameInformation?.timer?.startedBy === props?.user?.uid) {
@@ -30,7 +35,7 @@ const Timer = props => {
       }
     }, 1000);
     return () => clearInterval(interval);
-  }, [currentGameInformation?.timer?.startTime, currentGameInformation?.timer?.startedBy, props?.user?.uid, currentGameInformation?.geckoFinalAnswer]);
+  }, [currentGameInformation?.timer?.startTime, currentGameInformation?.timer?.startedBy, props?.user?.uid, currentGameInformation?.geckoFinalAnswer, currentGameInformation.players]);
 
   return (<center>
     <div style={{ width: '100px' }}>
@@ -38,6 +43,7 @@ const Timer = props => {
         {currentGameInformation?.timer?.timeRemaining}
       </div>
     </div>
+    <pre>{JSON.stringify(currentGameInformation.players)}</pre>
   </center>);
 };
 

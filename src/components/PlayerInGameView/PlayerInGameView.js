@@ -29,14 +29,14 @@ const PlayerInGameView = (props) => {
     if (geckoFinalAnswer && geckoFinalAnswer !== secretWord) {
       currentGameRef.child('winner').set('group');
       return <>
-        <div>The group wins!</div>
+        <h1>The group wins!</h1>
         <div>The Gecko - {gecko.name} - thought that &quot;{geckoCardGuess}&quot; was the secret word, and they ended the game early!</div>
       </>;
     }
     if (geckoCardGuess === secretWord) {
       currentGameRef.child('winner').set(gecko);
       return <>
-        <div>The Gecko - {gecko.name} - wins!</div>
+        <h1>The Gecko - {gecko.name} - wins!</h1>
         {geckoFinalAnswer && <div>They ended the game early, because they knew &quot;{geckoCardGuess}&quot; was the secret word.</div>}
         <div>They guessed the correct secret word!</div>
       </>;
@@ -48,10 +48,10 @@ const PlayerInGameView = (props) => {
     }, true)
     if (geckoCaught) {
       currentGameRef.child('winner').set('group');
-      return <><div>The group wins!</div><div>They caught the Gecko - {gecko.name}!</div></>;
+      return <><h1>The group wins!</h1><div>They caught the Gecko - {gecko.name}!</div></>;
     }
     currentGameRef.child('winner').set(gecko);
-    return <><div>The Gecko - {gecko.name} - wins!</div><div>The group didn&apos;t catch them!</div></>;
+    return <><h1>The Gecko - {gecko.name} - wins!</h1><div>The group didn&apos;t catch them!</div></>;
   }
 
   return (
