@@ -1,6 +1,12 @@
 {
   "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null"
+    "current_game_information": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "game_history": {
+      ".read": false,
+      ".write": "auth != null"
+    }
   }
 }
