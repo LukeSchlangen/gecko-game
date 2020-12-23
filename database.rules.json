@@ -7,6 +7,10 @@
     "game_history": {
       ".read": false,
       ".write": "auth != null"
+    },
+    "settings": {
+      ".read": false,
+      ".write": false
     }
   }
 }
