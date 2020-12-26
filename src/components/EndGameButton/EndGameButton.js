@@ -9,6 +9,7 @@ const EndGameButton = (props) => {
     currentGameRef.child('status').set('waiting for players');
     Object.keys(props.currentGameInformation.players).forEach(playerID => currentGameRef.child('players').child(playerID).child('vote').remove());
     Object.keys(props.currentGameInformation.players).forEach(playerID => currentGameRef.child('players').child(playerID).child('finalVote').remove());
+    Object.keys(props.currentGameInformation.players).forEach(playerID => currentGameRef.child('players').child(playerID).child('clueWord').remove());
   }
 
   return (

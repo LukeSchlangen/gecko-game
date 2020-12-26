@@ -8,6 +8,7 @@ import fire from '../../fire';
 import './Player.css';
 import PlayerList from '../PlayerList/PlayerList';
 import Timer from '../Timer/Timer';
+import ClueForm from '../ClueForm/ClueForm';
 
 const currentGameRef = fire.database().ref('current_game_information');
 
@@ -28,17 +29,17 @@ const Player = props => {
       const rawCurrentGameData = snapshot.val();
       const playersBeforeVoteTally = Object.values(rawCurrentGameData?.players || {}).reduce((aggregatePlayers, player) => ({ ...aggregatePlayers, [player.uid]: { ...player, votesAgainst: 0, finalizedVotesAgainst: 0 } }), {});
       const playersWithVotesAgainst = Object.values(playersBeforeVoteTally).reduce((aggregatePlayers, currentPlayerVoting) => {
-        if (currentPlayerVoting.vote) return { 
+        if (currentPlayerVoting.vote) return {
           ...aggregatePlayers,
           [currentPlayerVoting.vote]: { ...aggregatePlayers[currentPlayerVoting.vote], votesAgainst: aggregatePlayers[currentPlayerVoting.vote].votesAgainst + 1 }
-         }
+        }
         return aggregatePlayers;
       }, playersBeforeVoteTally);
       const playersWithFinalizedVotesAgainst = Object.values(playersWithVotesAgainst).reduce((aggregatePlayers, currentPlayerVoting) => {
-        if (currentPlayerVoting.finalVote) return { 
+        if (currentPlayerVoting.finalVote) return {
           ...aggregatePlayers,
           [currentPlayerVoting.finalVote]: { ...aggregatePlayers[currentPlayerVoting.finalVote], finalizedVotesAgainst: aggregatePlayers[currentPlayerVoting.finalVote].finalizedVotesAgainst + 1 }
-         }
+        }
         return aggregatePlayers;
       }, playersWithVotesAgainst);
       const gameInformationWithVotes = {
@@ -57,6 +58,7 @@ const Player = props => {
       <PlayerInGameView currentGameInformation={currentGameInformation} {...props} />
       <hr />
       <Timer currentGameInformation={currentGameInformation} {...props} />
+      <ClueForm currentGameInformation={currentGameInformation} {...props} />
       <PlayerList currentGameInformation={currentGameInformation} {...props} />
       <hr />
       <EndGameButton currentGameInformation={currentGameInformation} {...props} />

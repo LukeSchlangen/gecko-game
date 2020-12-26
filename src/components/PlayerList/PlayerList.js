@@ -46,16 +46,19 @@ const PlayerList = props => {
                 <div className="player-list-container">
                   <div className="align-left">
                     {player.name}
-                    {player.votesAgainst > 0 && ` - ${player.votesAgainst} Vote${player.votesAgainst > 1 ? 's' : ''} Against`}
+                    {player.clueWord && ` - ${player.clueWord}`}
                   </div>
+                  <small>
                   <div className="align-left">
-                    {player.finalizedVotesAgainst > 0 && `${player.finalizedVotesAgainst} Finalized Vote${player.finalizedVotesAgainst > 1 ? 's' : ''} Against`}
+                    {player.votesAgainst > 0 && `${player.votesAgainst} Vote${player.votesAgainst > 1 ? 's' : ''} Against`}
+                    {player.finalizedVotesAgainst > 0 && ` - ${player.finalizedVotesAgainst} Finalized`}
                   </div>
                   {currentVote === player.uid &&
-                    <div className="align-right">
+                    <div className="align-left">
                       {finalVote ? 'You finalized your vote for this player.' : 'You voted for this player.'}
                     </div>
                   }
+                  </small>
                 </div>
               </button>
             </div>
